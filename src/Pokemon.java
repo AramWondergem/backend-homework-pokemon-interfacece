@@ -8,4 +8,7 @@ public abstract class Pokemon {
     private int hp;
     private String food;
     private String sound;
+    private static int pokemonCount;
+
+    public Pokemon()
 }
