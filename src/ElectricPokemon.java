@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
-
+//raichu
 public class ElectricPokemon extends Pokemon{
     List<String> attacks = Arrays.asList(/*voer de aanvallen hier in*/);
 

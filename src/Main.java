@@ -29,7 +29,13 @@ public class Main {
 
     }
 
-
+    public static void waitingMain(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

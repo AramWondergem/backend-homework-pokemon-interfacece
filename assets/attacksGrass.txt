@@ -1,0 +1,12 @@
+LeechSeed
+5
+1
+SolarBeam
+10
+2
+LeafStorm
+15
+3
+LeaveBlade
+20
+4

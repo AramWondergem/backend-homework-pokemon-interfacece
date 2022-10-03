@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
-
+//blastiose and gyarados
 public class WaterPokemon extends Pokemon{
     List<String> attacks = Arrays.asList(/*voer de aanvallen hier in*/);
 

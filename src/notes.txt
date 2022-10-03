@@ -90,6 +90,10 @@ basic
         uitprinten lijst
 
 
+to do
+- next step: schrijven printAttacks pokemon methode
+- aanvullen uitzonderingen bij info over aanvallen
+
         -extra: beveiligen kiezen getal --> een range meegeven aan askingInput
         - random vullen van benchpokemon
 

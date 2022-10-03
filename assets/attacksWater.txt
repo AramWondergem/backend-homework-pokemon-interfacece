@@ -1,0 +1,12 @@
+Surf
+5
+1
+Raindance
+10
+2
+Hydropump
+15
+3
+HydroCanon
+20
+4

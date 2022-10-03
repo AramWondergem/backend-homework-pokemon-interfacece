@@ -11,7 +11,6 @@ public class PokemonTrainer {
     }
 
     public void chooseAttack(PokemonGymImpl gym) {
-        Scanner userInput=new Scanner(System.in);
         int placeholderAnswer;
 
         attackPokemon.printAttacks();
@@ -21,7 +20,7 @@ public class PokemonTrainer {
 
     public void choosePokemon(PokemonGymImpl gym) {
         this.printBenchPokemon();
-        int placeholderAnswer = PokemonGymImpl.askingInput("Whick do you choose from your deck? Type in the number of the pokemon.")
+        int placeholderAnswer = PokemonGymImpl.askingInput("Whick do you choose from your deck? Type in the number of the pokemon.");
         this.attackPokemon = benchPokemons.get(placeholderAnswer);
         benchPokemons.remove(placeholderAnswer);
         System.out.println(attackPokemon.getName() + " is ready to fight his opponent");

@@ -1,0 +1,12 @@
+Thunder
+5
+1
+VoltTackle
+10
+2
+ElectroBall
+15
+3
+ThunderPunch
+20
+4

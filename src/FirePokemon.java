@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.List;
-
+// charizard
 public class FirePokemon extends Pokemon{
     List<String> attacks = Arrays.asList(/*voer de aanvallen hier in*/);
 
