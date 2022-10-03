@@ -13,10 +13,9 @@ basic
  - ronde
  - bij dood pokemon --> nieuwe pokemon kiezen
     - je krijgt een voedsel of energie kaart
-    - je geeft energie aan je actieve pokemon en voedsel
+    - je geeft energie aan je actieve pokemon
         - energie geeft mogelijkheid om aan te vallen
-        - voedsel verhoogt de hp weer
-    - aanval doen met energiepunten
+    - aanval doen met energiepunten of voedsel
 
     einde spel
     - als alle pokemons dood zijn van de tegenstander
@@ -34,6 +33,7 @@ basic
     -
 
     gymowner extends speler --> paar methodes overriden
+    - etenskaart of aanvallen als etenskaart voor spelende pokomen, zo niet aanvallen --> dood maken tegenstander --> aanvallen. zelf niet overleven--> etenskaart --> anders aanvallen
     - aanval kiezen --> af laten hangen van hp zelf en of je aanval tegenstander overleeft
         - niet overleven --> aanvallen
         - max sterkte aanval --> aanvallen
@@ -52,9 +52,8 @@ basic
         - eentje uitkiezen
     - ronde spelen
         - een extra kaart krijgen
-        - een etenskaart uitdelen
         - een energie kaart uidelen
-        - een aanval doen
+        - een aanval doen of eten geven --> check if eten gegeven kan worden
         - checken of tegenstander dood is
         - checken of er gewonnen is
         - volgende speler
@@ -70,7 +69,6 @@ basic
 
     pokemon
     - plek om energie kaarten te sparen
-
     - laten zien welke aanvallen er gedaan kunnen worden met de energie kaarten
     - doodgaan
     - verhogen hp door krijgen voedsel
@@ -90,5 +88,10 @@ basic
         wat de schade is van de aanvallen --> switch statement
         welke aanvallen er kunnen --> lijst maken met check
         uitprinten lijst
+
+
+        -extra: beveiligen kiezen getal --> een range meegeven aan askingInput
+        - random vullen van benchpokemon
+
 
 
