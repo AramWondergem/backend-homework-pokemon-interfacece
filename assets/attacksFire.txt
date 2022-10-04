@@ -8,5 +8,5 @@ Inferno
 15
 3
 FlameThrower
-20
+30
 4

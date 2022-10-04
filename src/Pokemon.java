@@ -141,6 +141,28 @@ public abstract class Pokemon {
         return placeholderDamageOrEnergyCosts;
     }
 
+    public String getAttackBasedOnEnergy(String energyForAttackCount) {
+        List<String> placeholderListAttacksType = generalAttacks.get(this.type);
+        int placeholderIndex;
+        String placeHolderAttack="";
+
+        for (int i = 0; i < placeholderListAttacksType.size(); i++) {
+                String listItem = placeholderListAttacksType.get(i);
+                if (listItem.equals(energyForAttackCount)) {
+                    placeholderIndex = i -2 ;//-2 because the index of the attack is the index of energy needed minus two
+                    placeHolderAttack = placeholderListAttacksType.get(placeholderIndex);
+                    break;
+                }
+            }
+
+        if (placeHolderAttack.equals("")) {
+            System.out.println("something went wrong in the getAttacksBasedOnEnergy method in pokemon class");
+        }
+
+        return placeHolderAttack;
+    }
+
+
     public void printAttacks(Pokemon enemy) {
         List<String> placeholderAttacksArray = generalAttacks.get(this.type);
         List<Integer> placeholderIndexAttacks = new ArrayList<>();
@@ -213,7 +235,7 @@ public abstract class Pokemon {
     }
 
     public void eatingFood() {
-        this.hp += 10;
+        this.hp += 10; //When this has to be changed, also change attackPokemonHpWIthFOod in chooseAttackOrFeed method of the PokemonGymOwnerClass
     }
 
     public void addEnergyForAttackCount() {
@@ -313,5 +335,9 @@ public abstract class Pokemon {
             trainer.removePokemon(this);
         }
         this.trainer = null;
+    }
+
+    public static Map<String, List<String>> getGeneralAttacks() {
+        return generalAttacks;
     }
 }

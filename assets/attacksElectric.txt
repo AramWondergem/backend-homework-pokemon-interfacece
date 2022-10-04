@@ -1,4 +1,4 @@
-Thunder
+ThunderPunch
 5
 1
 VoltTackle
@@ -7,6 +7,6 @@ VoltTackle
 ElectroBall
 15
 3
-ThunderPunch
-20
+Thunder
+30
 4

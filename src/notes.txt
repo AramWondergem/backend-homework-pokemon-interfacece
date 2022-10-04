@@ -44,7 +44,7 @@ basic
     - etenskaart kiezen --> eerst spelende pokemon dan pokemon met laagste leven op de bench
 
 
-    spel --> interface
+    spel --> interface --> switch in beginnende speler
     - checken of er gewonnen is en uitroepen winnaar
     - start van het spel
         - kaarten krijgen
@@ -91,7 +91,7 @@ basic
 
 
 to do
-- next step: adept method losesHP of class Pokemon what happens when it dies
+- next step: zorg ervoor dat je niet kan aanvallen met 0 energy punten en verwerk dit in de keus van de pokemonGymOwner
 
         -extra: beveiligen kiezen getal --> een range meegeven aan askingInput
         - random vullen van benchpokemon

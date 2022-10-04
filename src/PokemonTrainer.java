@@ -2,9 +2,9 @@ import java.util.*;
 
 public class PokemonTrainer {
     private String name;
-    private List<Pokemon> benchPokemons = new ArrayList<>();
-    private Pokemon attackPokemon;
-    private List<String> cardDeckEnergieAndFood = new ArrayList<>();
+    List<Pokemon> benchPokemons = new ArrayList<>();
+    Pokemon attackPokemon;
+    List<String> cardDeckEnergieAndFood = new ArrayList<>();
 
     public PokemonTrainer(String name) {
         this.name = name;
@@ -18,9 +18,9 @@ public class PokemonTrainer {
         attackPokemon.doAttack(placeholderAnswer, gym);
     }
 
-    public void choosePokemon(PokemonGymImpl gym) {
+    public void choosePokemon(Pokemon enemy) {
         this.printBenchPokemon();
-        int placeholderAnswer = PokemonGymImpl.askingInput("Whick do you choose from your deck? Type in the number of the pokemon.");
+        int placeholderAnswer = PokemonGymImpl.askingInput("Which do you choose from your deck? Type in the number of the pokemon.");
         this.attackPokemon = benchPokemons.get(placeholderAnswer);
         benchPokemons.remove(placeholderAnswer);
         System.out.println(attackPokemon.getName() + " is ready to fight his opponent");
@@ -74,21 +74,24 @@ public class PokemonTrainer {
         }
 
     }
-
-    public void chooseFood() {
+    public List getListWithPokemonsToFeed() {
         List<Pokemon> pokemonsThatCanReceiveFood = new ArrayList<>();
-        boolean foodMatchesPokemons = false;
 
+// filling a list with the pokemons that can receive food based on the card deck
         for (Pokemon p : benchPokemons) {
             if (cardDeckEnergieAndFood.contains(p.getFood())) {
-                foodMatchesPokemons = true;
                 pokemonsThatCanReceiveFood.add(p);
             }
         }
         if (cardDeckEnergieAndFood.contains(attackPokemon.getFood())) {
-            foodMatchesPokemons = true;
+
             pokemonsThatCanReceiveFood.add(attackPokemon);
         }
+        return pokemonsThatCanReceiveFood;
+    }
+    public void chooseFood() {
+        List<Pokemon> pokemonsThatCanReceiveFood = getListWithPokemonsToFeed();
+        boolean foodMatchesPokemons = pokemonsThatCanReceiveFood.size()>0;
 
         if (foodMatchesPokemons) {
             printCardDeck();
