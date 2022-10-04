@@ -11,6 +11,7 @@ public abstract class Pokemon {
     private String sound;
     private static int pokemonCount;
     private int energyForAttackCount;
+    private PokemonTrainer trainer;
     // place to save all the attacks which can be done
     private static Map<String, List<String>> generalAttacks = new HashMap<>();
     private static List<String> attacksElectric = new ArrayList<>();
@@ -26,10 +27,10 @@ public abstract class Pokemon {
         loadAttacks("assets/attacksGrass.txt", attacksGrass);
         loadAttacks("assets/attacksFire.txt", attacksFire);
 
-        generalAttacks.put("Electric", attacksElectric);
-        generalAttacks.put("Fire", attacksFire);
-        generalAttacks.put("Water", attacksWater);
-        generalAttacks.put("Grass", attacksGrass);
+        generalAttacks.put("electric", attacksElectric);
+        generalAttacks.put("fire", attacksFire);
+        generalAttacks.put("water", attacksWater);
+        generalAttacks.put("grass", attacksGrass);
     }
 
     public Pokemon(String type, String name) {
@@ -116,13 +117,13 @@ public abstract class Pokemon {
             } else if (lessEffect1) {
                 placeholderDamage = getStandardDamageOrEnergyCosts(attackName, 1);
             } else if (lessEffect2) {
-                placeholderDamage = (getStandardDamageOrEnergyCosts(attackName, 1)/5)*3;
+                placeholderDamage = (getStandardDamageOrEnergyCosts(attackName, 1) / 5) * 3;
             } else if (leastEffect) {
-                placeholderDamage = (getStandardDamageOrEnergyCosts(attackName, 1)/5);
+                placeholderDamage = (getStandardDamageOrEnergyCosts(attackName, 1) / 5);
             }
         }
         return placeholderDamage;
-}
+    }
 
     public int getStandardDamageOrEnergyCosts(String attackName, int oneForDamageTwoForEnergyCosts) {
         int placeholderIndex;
@@ -140,23 +141,97 @@ public abstract class Pokemon {
         return placeholderDamageOrEnergyCosts;
     }
 
-    public void printAttacks() {
+    public void printAttacks(Pokemon enemy) {
+        List<String> placeholderAttacksArray = generalAttacks.get(this.type);
+        List<Integer> placeholderIndexAttacks = new ArrayList<>();
+
+        for (int i = 0; i < placeholderAttacksArray.size(); i++) {
+            boolean energyMatchesCosts = Integer.parseInt(placeholderAttacksArray.get(i)) == energyForAttackCount;
+            if (energyMatchesCosts) {
+                placeholderIndexAttacks.add(i - 2); // minus two, because that is the index of the attack in relation to the energycosts. See attacks file and load attacks method.
+            }
+        }
+
+        for (Integer j : placeholderIndexAttacks) {
+            String nameAttack = placeholderAttacksArray.get(j);
+            Integer damage = damageCalculator(nameAttack, enemy);
+            System.out.println(j + ":" + nameAttack + "(" + damage + ")");
+
+            if (nameAttack.equals("Raindance") && damage == 0) {
+                System.out.println("It has no effect on " + enemy.getName() + ", because it is an electric pokemon");
+            } else if (nameAttack.equals("Raindance") && enemy.getType().equals("grass")) {
+                System.out.println("It will boost the hp of the enemy, because it is a grass pokemon");
+            } else if (nameAttack.equals("Thunder") && enemy.getType().equals("electric")) {
+                System.out.println("It will boost the hp of the enemy, because it is a electric pokemon");
+            } else if (nameAttack.equals("LeechSeed")) {
+                System.out.println("It will add the HP lose of your enemy to the HP of your own pokemon");
+            }
+        }
+
+
     }
 
-    public void doAttack(int indexAttack, PokemonGymImpl gym) {
+    public void doAttack(int indexAttack, Pokemon enemy) {
+        List<String> placeholderAttacksArray = generalAttacks.get(this.type);
+        String nameAttack = placeholderAttacksArray.get(indexAttack);
+        Integer damage = damageCalculator(nameAttack, enemy);
+
+        if (nameAttack.equals("Raindance") && damage == 0) {
+            this.makeSound();
+            System.out.println(nameAttack + " has no effect on " + enemy.getName() + ", because it is an electric Pokemon");
+        } else if (nameAttack.equals("Raindance") && enemy.getType().equals("grass")) {
+            enemy.losesHP(damage);
+            this.makeSound();
+            System.out.println(this.name + " does the attack " + nameAttack.toUpperCase(Locale.ROOT) + " on " + enemy.getName() + ". It boosted his HP with " + (Math.abs(damage)) + " to " + enemy.getHp());
+        } else if (nameAttack.equals("Thunder") && enemy.getType().equals("electric")) {
+            enemy.losesHP(damage);
+            this.makeSound();
+            System.out.println(this.name + " does the attack " + nameAttack.toUpperCase(Locale.ROOT) + " on " + enemy.getName() + ". It boosted his HP with " + (Math.abs(damage)) + " to " + enemy.getHp());
+        } else if (nameAttack.equals("LeechSeed")) {
+            enemy.losesHP(damage);
+            this.losesHP(-damage);
+            this.makeSound();
+            System.out.println(this.name + " does the attack " + nameAttack.toUpperCase(Locale.ROOT) + " on " + enemy.getName() + ". It boosted his own HP with " + (damage) + " to " + this.getHp() + ". The HP of " + enemy.getName() + " lowered with " + damage + " to " + enemy.getName());
+        } else {
+            enemy.losesHP(damage);
+            this.makeSound();
+            System.out.println(this.name + " does the attack " + nameAttack.toUpperCase(Locale.ROOT) + " on " + enemy.getName() + ". It lowered his HP with " + (damage) + " to " + enemy.getHp());
+
+        }
+
+        System.out.println("Energy before: " + energyForAttackCount);
+        this.energyForAttackCount -= this.getStandardDamageOrEnergyCosts(nameAttack, 2);
+        System.out.println("Energy after: " + energyForAttackCount);
     }
 
     public void makeSound() {
+        System.out.println();
 
+        for (int i = 0; i < 5; i++) {
+            System.out.print(this.sound);
+        }
     }
 
     public void eatingFood() {
-        //increasing hp with a certain number
+        this.hp += 10;
     }
 
     public void addEnergyForAttackCount() {
-        //make it max 4
+        if (energyForAttackCount < 4) {
+            energyForAttackCount++;
+        } else {
+            System.out.println("Your pokemon cannot receive more energy");
+        }
     }
+
+    public void losesHP(int damage) {
+        this.hp-=damage;
+        if (this.hp<=0) {
+            System.out.println(this.name + " is dead.");
+            removeTrainer(this.trainer);
+        }
+    }
+
 
     //Getters and Setters
     public String getName() {
@@ -217,5 +292,26 @@ public abstract class Pokemon {
 
     public int getEnergyForAttackCount() {
         return energyForAttackCount;
+    }
+
+    public PokemonTrainer getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer (PokemonTrainer trainer){
+        if (this.trainer != trainer && this.trainer != null){
+            this.trainer.removePokemon(this);
+        }
+        if (trainer.hasPokemon(this)) {
+            trainer.addPokemon(this);
+        }
+        this.trainer=trainer;
+    }
+
+    public void removeTrainer(PokemonTrainer trainer) {
+        if (trainer.hasPokemon(this)) {
+            trainer.removePokemon(this);
+        }
+        this.trainer = null;
     }
 }

@@ -4,10 +4,10 @@ public class PokemonTrainer {
     private String name;
     private List<Pokemon> benchPokemons = new ArrayList<>();
     private Pokemon attackPokemon;
-    private List<String> cardDeckEnergieAndFood= new ArrayList<>();
+    private List<String> cardDeckEnergieAndFood = new ArrayList<>();
 
-    public PokemonTrainer(String name){
-        this.name=name;
+    public PokemonTrainer(String name) {
+        this.name = name;
     }
 
     public void chooseAttack(PokemonGymImpl gym) {
@@ -15,7 +15,7 @@ public class PokemonTrainer {
 
         attackPokemon.printAttacks();
         placeholderAnswer = PokemonGymImpl.askingInput("Which attack do you choose? Type in the number of the attack.");
-        attackPokemon.doAttack(placeholderAnswer,gym);
+        attackPokemon.doAttack(placeholderAnswer, gym);
     }
 
     public void choosePokemon(PokemonGymImpl gym) {
@@ -28,34 +28,34 @@ public class PokemonTrainer {
     }
 
     public void printBenchPokemon() {
-        for (Pokemon p:this.benchPokemons){
+        for (Pokemon p : this.benchPokemons) {
             System.out.println(benchPokemons.indexOf(p) + ":" + p.getName());
         }
 
     }
 
-    public void chooseEnergyCard (){
+    public void chooseEnergyCard() {
         //Make a list of pokemons that can receive energy. They must have less than 4 energyForAttackCount and in the energy and food deck should be an card they can receive
-        List<Pokemon> pokemonsThatCanReceiveEnergy= new ArrayList<>();
+        List<Pokemon> pokemonsThatCanReceiveEnergy = new ArrayList<>();
         boolean deckMatchCards = false;
 
-        for (Pokemon p: benchPokemons) {
-            if(cardDeckEnergieAndFood.contains(p.getType())&&p.getEnergyForAttackCount()<4) {
-                deckMatchCards=true;
+        for (Pokemon p : benchPokemons) {
+            if (cardDeckEnergieAndFood.contains(p.getType()) && p.getEnergyForAttackCount() < 4) {
+                deckMatchCards = true;
                 pokemonsThatCanReceiveEnergy.add(p);
             }
         }
-        if(cardDeckEnergieAndFood.contains(attackPokemon.getType())&&attackPokemon.getEnergyForAttackCount()<4){
-            deckMatchCards=true;
+        if (cardDeckEnergieAndFood.contains(attackPokemon.getType()) && attackPokemon.getEnergyForAttackCount() < 4) {
+            deckMatchCards = true;
             pokemonsThatCanReceiveEnergy.add(attackPokemon);
         }
 
         if (deckMatchCards) {
             printCardDeck();
-            for (Pokemon p:pokemonsThatCanReceiveEnergy) {
+            for (Pokemon p : pokemonsThatCanReceiveEnergy) {
                 System.out.println(pokemonsThatCanReceiveEnergy.indexOf(p) + ":" + p.getName());
             }
-            int placeholderAnswer=PokemonGymImpl.askingInput("Which pokemon do you want to give an energy card?");
+            int placeholderAnswer = PokemonGymImpl.askingInput("Which pokemon do you want to give an energy card?");
             Pokemon energyReceivingPokemon = pokemonsThatCanReceiveEnergy.get(placeholderAnswer);
             energyReceivingPokemon.addEnergyForAttackCount();
             cardDeckEnergieAndFood.remove(energyReceivingPokemon.getType()); //removing the "energy card" from the deck
@@ -67,35 +67,35 @@ public class PokemonTrainer {
 
     }
 
-    public void printCardDeck(){
+    public void printCardDeck() {
         System.out.println("----------Your Card Deck ------------");
-        for (int i=0;1<cardDeckEnergieAndFood.size();i++){
+        for (int i = 0; 1 < cardDeckEnergieAndFood.size(); i++) {
             System.out.println(i + ":" + cardDeckEnergieAndFood.get(i));
         }
 
     }
 
-    public void chooseFood () {
-        List<Pokemon> pokemonsThatCanReceiveFood= new ArrayList<>();
+    public void chooseFood() {
+        List<Pokemon> pokemonsThatCanReceiveFood = new ArrayList<>();
         boolean foodMatchesPokemons = false;
 
-        for (Pokemon p: benchPokemons) {
-            if(cardDeckEnergieAndFood.contains(p.getFood())) {
-                foodMatchesPokemons=true;
+        for (Pokemon p : benchPokemons) {
+            if (cardDeckEnergieAndFood.contains(p.getFood())) {
+                foodMatchesPokemons = true;
                 pokemonsThatCanReceiveFood.add(p);
             }
         }
-        if(cardDeckEnergieAndFood.contains(attackPokemon.getFood())){
-            foodMatchesPokemons=true;
+        if (cardDeckEnergieAndFood.contains(attackPokemon.getFood())) {
+            foodMatchesPokemons = true;
             pokemonsThatCanReceiveFood.add(attackPokemon);
         }
 
         if (foodMatchesPokemons) {
             printCardDeck();
-            for (Pokemon p:pokemonsThatCanReceiveFood) {
+            for (Pokemon p : pokemonsThatCanReceiveFood) {
                 System.out.println(pokemonsThatCanReceiveFood.indexOf(p) + ":" + p.getName());
             }
-            int placeholderAnswer=PokemonGymImpl.askingInput("Which pokemon do you want to give an food card?");
+            int placeholderAnswer = PokemonGymImpl.askingInput("Which pokemon do you want to give an food card?");
             Pokemon foodReceivingPokemon = pokemonsThatCanReceiveFood.get(placeholderAnswer);
             foodReceivingPokemon.eatingFood();
             cardDeckEnergieAndFood.remove(foodReceivingPokemon.getFood()); //removing the "food card" from the deck
@@ -113,18 +113,6 @@ public class PokemonTrainer {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Pokemon> getBenchPokemons() {
-        return benchPokemons;
-    }
-
-    public void setBenchPokemons(List<Pokemon> benchPokemons) {
-        this.benchPokemons = benchPokemons;
-    }
-
     public Pokemon getAttackPokemon() {
         return attackPokemon;
     }
@@ -133,11 +121,26 @@ public class PokemonTrainer {
         this.attackPokemon = attackPokemon;
     }
 
-    public List<String> getCardDeckEnergieAndFood() {
-        return cardDeckEnergieAndFood;
+    public void addPokemon(Pokemon pokemon) {
+        benchPokemons.add(pokemon);
+        if (pokemon.getTrainer() != this && pokemon.getTrainer() != null) {
+            pokemon.removeTrainer(pokemon.getTrainer());
+        }
+        pokemon.setTrainer(this);
     }
 
-    public void setCardDeckEnergieAndFood(List<String> cardDeckEnergieAndFood) {
-        this.cardDeckEnergieAndFood = cardDeckEnergieAndFood;
+    public void removePokemon(Pokemon pokemon) {
+        if (benchPokemons.contains(pokemon)) {
+            benchPokemons.remove(pokemon);
+        } else if (attackPokemon.equals(pokemon)) {
+            attackPokemon = null;
+        }
+        pokemon.removeTrainer(this);
+    }
+
+    public boolean hasPokemon(Pokemon pokemon) {
+        boolean hasPokemon = benchPokemons.contains(pokemon)||attackPokemon.equals(pokemon);
+        return hasPokemon;
+
     }
 }

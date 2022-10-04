@@ -40,7 +40,7 @@ basic
         - niet aanvallen
     - pokemon kiezen
         - af laten hangen van opponenent -- sterkste tegenstander
-    - energie kaart kiezen om te geven --> altijd geven als je eentje hebt
+    - energie kaart kiezen om te geven → altijd geven als je eentje hebt
     - etenskaart kiezen --> eerst spelende pokemon dan pokemon met laagste leven op de bench
 
 
@@ -91,11 +91,17 @@ basic
 
 
 to do
-- next step: schrijven printAttacks pokemon methode
-- aanvullen uitzonderingen bij info over aanvallen
+- next step: adept method losesHP of class Pokemon what happens when it dies
 
         -extra: beveiligen kiezen getal --> een range meegeven aan askingInput
         - random vullen van benchpokemon
+        - de damage van aanvallen per aanval verhogen of verlagen. deelbaar door 5
+
+
+        bij testen
+        - misschien arraylist
+        - testen functies uitzonderingen
+        - test function to lower
 
 
 
