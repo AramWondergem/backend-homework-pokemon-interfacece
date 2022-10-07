@@ -13,7 +13,7 @@ Electric ⚡. Daarnaast gaan we een gym maken en een trainer, zodat de applicati
 Naast hun type, hebben Pokémon natuurlijk bepaalde eigenschappen met elkaar gemeen. Daarom maken we gebruik van een
 **super** klasse. Ook gaan we kijken naar overloading, polymorfisme en een interface.
 
-![Pokemon!](./assets/pokemon.JPG)
+![Pokemon!](src/main/assets/pokemon.JPG)
 
 ## Randvoorwaarden
 
