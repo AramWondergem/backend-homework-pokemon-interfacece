@@ -13,9 +13,9 @@ public class PokemonTrainer {
     public void chooseAttack(PokemonGymImpl gym) {
         int placeholderAnswer;
 
-        attackPokemon.printAttacks();
+//        attackPokemon.printAttacks();
         placeholderAnswer = PokemonGymImpl.askingInput("Which attack do you choose? Type in the number of the attack.");
-        attackPokemon.doAttack(placeholderAnswer, gym);
+//        attackPokemon.doAttack(placeholderAnswer, gym);
     }
 
     public void choosePokemon(Pokemon enemy) {

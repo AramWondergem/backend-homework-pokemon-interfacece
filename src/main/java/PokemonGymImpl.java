@@ -5,9 +5,9 @@ public class PokemonGymImpl {
     private String nameOfGymOwner;
 
 
-    public PokemonTrainer createGymOwner (String name) {
-        // create gymowner when gym is initialized
-    }
+//    public PokemonTrainer createGymOwner (String name) {
+//        // create gymowner when gym is initialized
+//    }
 
 
     public static int askingInput(String question) {

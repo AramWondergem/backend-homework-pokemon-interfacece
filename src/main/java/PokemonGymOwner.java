@@ -163,7 +163,7 @@ public class PokemonGymOwner extends PokemonTrainer {
         // index of attack which can be done this round in the arraylist by attack pokemon
         Integer indexAttack = null;
         String attackName = this.attackPokemon.getAttackBasedOnEnergy(Integer.toString(this.attackPokemon.getEnergyForAttackCount()));
-        Map<String, List<String>> placeholderGeneralAttacksMap = Pokemon.getGeneralAttacks();
+        Map<String, List<String>> placeholderGeneralAttacksMap = this.attackPokemon.getGeneralAttacks();
         List<String> placeholderAttacksList = placeholderGeneralAttacksMap.get(this.attackPokemon.getType());
 
         for (int i = 0; i < placeholderAttacksList.size(); i++) {
