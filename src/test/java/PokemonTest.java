@@ -85,7 +85,7 @@ class PokemonTest {
         assertEquals("ElectroBall", attackName3);
     }
 
-    @Disabled
+    @Test
     void when_printAttacks_Expect_printsAllAttackbasedOnEnergycostsAndEnergy() {
         //Arrange and Act
         Pokemon p = new Pokemon("blastoise");
@@ -94,15 +94,30 @@ class PokemonTest {
         p.addEnergyForAttackCount();
         p.addEnergyForAttackCount();
         p.addEnergyForAttackCount();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        //act
         p.printAttacks(p2);
+        //assert
+        assertTrue(outContent.toString().contains("Surf"));
+        assertTrue(outContent.toString().contains("HydroCanon"));
+        assertTrue(outContent.toString().contains("Hydropump"));
+        assertTrue(outContent.toString().contains("Raindance"));
+
     }
 
-    @Disabled
+    @Test
     void when_doAttack_Expect_printsTheInformationInTHeConsoleBasedOnAttackAndOppenent () {
         //Arrange and Act
         Pokemon p = new Pokemon("sunflora");
         Pokemon p2 = new Pokemon("raichu");
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        //Act
         p.doAttack(3, p2);
+        //assert
+        assertTrue(outContent.toString().contains("sunflora does the attack SOLARBEAM on raichu"));
 
     }
 

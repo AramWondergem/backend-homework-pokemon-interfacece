@@ -91,7 +91,7 @@ basic
 
 
 to do
-- next step: zorg ervoor dat je niet kan aanvallen met 0 energy punten en verwerk dit in de keus van de pokemonGymOwner
+- next step: doAttack test schrijven
 
         -extra: beveiligen kiezen getal --> een range meegeven aan askingInput
         - random vullen van benchpokemon

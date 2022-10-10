@@ -196,8 +196,6 @@ public class PokemonGymOwner extends PokemonTrainer {
         boolean foodForPokemon = !noFoodForPokemon;
 
 
-
-
         if (opponentElectricAndNextRoundThunder) {
             //situation where the attackpokomon is a electric pokemon and next round the thunder attack has a positive effect on enemy of the electric type. --> attack
             this.attackPokemon.doAttack(indexAttack, enemy);
@@ -210,6 +208,8 @@ public class PokemonGymOwner extends PokemonTrainer {
         } else if (killOpponent) {
             //situation in which the opponent can be killed with attack --> attack
             this.attackPokemon.doAttack(indexAttack, enemy);
+        } else if (noFoodForPokemon&&attackPokemon.getEnergyForAttackCount()>0) {
+            System.out.println("Your opponent cannot attack or give food to his pokemon");
         } else if (noFoodForPokemon) {
             // situation where there is no food card
             boolean willNotSurviveAttackNextRound = attackPokemonHPWithoutFood <= damageNextAttackOpponent;
