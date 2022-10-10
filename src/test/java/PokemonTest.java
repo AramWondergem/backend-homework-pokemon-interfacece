@@ -1,4 +1,8 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,10 +85,10 @@ class PokemonTest {
         assertEquals("ElectroBall", attackName3);
     }
 
-    @Test
+    @Disabled
     void when_printAttacks_Expect_printsAllAttackbasedOnEnergycostsAndEnergy() {
         //Arrange and Act
-        Pokemon p = new Pokemon("raichu");
+        Pokemon p = new Pokemon("blastoise");
         Pokemon p2 = new Pokemon("raichu");
         p.addEnergyForAttackCount();
         p.addEnergyForAttackCount();
@@ -93,4 +97,57 @@ class PokemonTest {
         p.printAttacks(p2);
     }
 
+    @Disabled
+    void when_doAttack_Expect_printsTheInformationInTHeConsoleBasedOnAttackAndOppenent () {
+        //Arrange and Act
+        Pokemon p = new Pokemon("sunflora");
+        Pokemon p2 = new Pokemon("raichu");
+        p.doAttack(3, p2);
+
+    }
+
+    @Test
+    void when_energyForAttackCountIs4AndAddEnergyForAttackCount_Expect_WarningIsPrinted(){
+       //Arrange and Act
+        Pokemon p = new Pokemon("blastoise");
+        p.addEnergyForAttackCount();
+        p.addEnergyForAttackCount();
+        p.addEnergyForAttackCount();
+        p.addEnergyForAttackCount();
+        p.addEnergyForAttackCount();
+        //Assert
+        assertEquals(4,p.getEnergyForAttackCount());
+    }
+
+@Test
+    void when_losesHPMoreThanHP_Expect_TrainerIsRemovedInPokemonObjectAndThePokemonIsRemovedInTrainerObject(){
+   //Arrange
+    Pokemon p = new Pokemon("venusaur");
+    PokemonTrainer t= new PokemonTrainer("Hans");
+    p.setTrainer(t);
+    assertTrue(t.hasPokemon(p));
+    assertSame(t, p.getTrainer());
+    t.setAttackPokemon(p);
+    //Act
+    p.losesHP(80);
+    //Assert
+    assertFalse(t.hasPokemon(p));
+    assertEquals(null,p.getTrainer());
+
+
+
+}
+
+    @Test
+    void makeSound() {
+        //Arrange
+        Pokemon p=new Pokemon("raichu");
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        //Act
+        p.makeSound();
+        //assert
+        assertEquals("\r\nRAAAAICHUUURAAAAICHUUURAAAAICHUUURAAAAICHUUURAAAAICHUUU\r\n", outContent.toString());
+
+    }
 }

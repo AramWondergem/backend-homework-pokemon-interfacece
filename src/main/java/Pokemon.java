@@ -181,16 +181,16 @@ public class Pokemon {
             String nameAttack = placeholderAttacksArray.get(j);
             Integer damage = damageCalculator(nameAttack, enemy);
 
-            System.out.println(j + ":" + nameAttack + "(" + damage + ")");
+            System.out.print("\n" + j + ":" + nameAttack + "(" + damage + ")");
 
             if (nameAttack.equals("Raindance") && damage == 0) {
-                System.out.println("    -It has no effect on " + enemy.getName() + ", because it is an electric pokemon");
+                System.out.println("---It has no effect on " + enemy.getName() + ", because it is an electric pokemon");
             } else if (nameAttack.equals("Raindance") && enemy.getType().equals("grass")) {
-                System.out.println("    -It will boost the hp of the enemy, because it is a grass pokemon");
+                System.out.println("---It will boost the hp of the enemy, because it is a grass pokemon");
             } else if (nameAttack.equals("Thunder") && enemy.getType().equals("electric")) {
-                System.out.println("    -It will boost the hp of the enemy, because it is a electric pokemon");
+                System.out.println("---It will boost the hp of the enemy, because it is a electric pokemon");
             } else if (nameAttack.equals("LeechSeed")) {
-                System.out.println("    -It will add the HP lose of your enemy to the HP of your own pokemon");
+                System.out.println("---It will add the HP lose of your enemy to the HP of your own pokemon");
             }
         }
 
@@ -236,6 +236,7 @@ public class Pokemon {
         for (int i = 0; i < 5; i++) {
             System.out.print(this.sound);
         }
+        System.out.println();
     }
 
     public void eatingFood() {
@@ -312,9 +313,7 @@ public class Pokemon {
         return pokemonCount;
     }
 
-    public static void setPokemonCount(int pokemonCount) {
-        Pokemon.pokemonCount = pokemonCount;
-    }
+
 
     public int getEnergyForAttackCount() {
         return energyForAttackCount;
@@ -328,7 +327,7 @@ public class Pokemon {
         if (this.trainer != trainer && this.trainer != null){
             this.trainer.removePokemon(this);
         }
-        if (trainer.hasPokemon(this)) {
+        if (!trainer.hasPokemon(this)) {
             trainer.addPokemon(this);
         }
         this.trainer=trainer;

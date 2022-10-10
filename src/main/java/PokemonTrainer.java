@@ -10,12 +10,12 @@ public class PokemonTrainer {
         this.name = name;
     }
 
-    public void chooseAttack(PokemonGymImpl gym) {
+    public void chooseAttack(Pokemon enemy) {
         int placeholderAnswer;
 
-//        attackPokemon.printAttacks();
+        attackPokemon.printAttacks(enemy);
         placeholderAnswer = PokemonGymImpl.askingInput("Which attack do you choose? Type in the number of the attack.");
-//        attackPokemon.doAttack(placeholderAnswer, gym);
+        attackPokemon.doAttack(placeholderAnswer, enemy);
     }
 
     public void choosePokemon(Pokemon enemy) {
@@ -24,7 +24,11 @@ public class PokemonTrainer {
         this.attackPokemon = benchPokemons.get(placeholderAnswer);
         benchPokemons.remove(placeholderAnswer);
         System.out.println(attackPokemon.getName() + " is ready to fight his opponent");
-        attackPokemon.makeSound();
+        this.attackPokemon.makeSound();
+    }
+
+    public List<Pokemon> getBenchPokemons() {
+        return benchPokemons;
     }
 
     public void printBenchPokemon() {
@@ -142,7 +146,10 @@ public class PokemonTrainer {
     }
 
     public boolean hasPokemon(Pokemon pokemon) {
-        boolean hasPokemon = benchPokemons.contains(pokemon)||attackPokemon.equals(pokemon);
+        boolean hasPokemon = benchPokemons.contains(pokemon);
+        if (this.attackPokemon!=null) {
+            hasPokemon = attackPokemon.equals(pokemon);
+        }
         return hasPokemon;
 
     }

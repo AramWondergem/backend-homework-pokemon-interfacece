@@ -7,7 +7,7 @@ public class PokemonGymOwner extends PokemonTrainer {
     }
 
     @Override
-    public void chooseAttack(PokemonGymImpl gym) {
+    public void chooseAttack(Pokemon enemy) {
         // check if pokemon can attack: numberofEnergyCards>0
         //get hp of the attack pokemon
         //get strongest attack of opponent
