@@ -53,7 +53,7 @@ class PokemonGymOwnerTest {
     }
 
     @Test
-    void when_doAttackElectricToElectricAndNext3Energy_Expect_EnemyHasLowerHP() {
+    void when_doAttackElectricToElectricAndNextRound4Energy_Expect_EnemyHasLowerHP() {
         //arrange
         PokemonGymOwner gymOwner = new PokemonGymOwner("Pietje");
         Pokemon attackPokemon = new Pokemon("raichu");
@@ -67,6 +67,60 @@ class PokemonGymOwnerTest {
         //act
         gymOwner.chooseAttackOrFeed(enemyPokemon);
         //Assert
+        assertNotEquals(60,enemyPokemon.getHp());
+    }
+
+    @Test
+    void when_doAttackWaterToElectricAndNextRound4Energy_Expect_EnemyHasLowerHP() {
+        //arrange
+        PokemonGymOwner gymOwner = new PokemonGymOwner("Pietje");
+        Pokemon attackPokemon = new Pokemon("blastoise");
+        Pokemon enemyPokemon = new Pokemon("raichu");
+        gymOwner.setAttackPokemon(attackPokemon);
+        for (int i = 0; i < 3; i++) {
+            attackPokemon.addEnergyForAttackCount();
+        }
+        int hPEnemyPokemon = enemyPokemon.getHp();
+        assertEquals(60,hPEnemyPokemon);
+        //act
+        gymOwner.chooseAttackOrFeed(enemyPokemon);
+        //Assert
+        assertNotEquals(60,enemyPokemon.getHp());
+    }
+
+    @Test
+    void when_doAttackWaterToGrassAndNextRound4Energy_Expect_EnemyHasLowerHP() {
+        //arrange
+        PokemonGymOwner gymOwner = new PokemonGymOwner("Pietje");
+        Pokemon attackPokemon = new Pokemon("blastoise");
+        Pokemon enemyPokemon = new Pokemon("venusaur");
+        gymOwner.setAttackPokemon(attackPokemon);
+        for (int i = 0; i < 3; i++) {
+            attackPokemon.addEnergyForAttackCount();
+        }
+        int hPEnemyPokemon = enemyPokemon.getHp();
+        assertEquals(80,hPEnemyPokemon);
+        //act
+        gymOwner.chooseAttackOrFeed(enemyPokemon);
+        //Assert
         assertNotEquals(80,enemyPokemon.getHp());
+    }
+
+    @Test
+    void when_doAttackWaterToFireAndStrongestAttack_Expect_EnemyHasLowerHP() {
+        //arrange
+        PokemonGymOwner gymOwner = new PokemonGymOwner("Pietje");
+        Pokemon attackPokemon = new Pokemon("blastoise");
+        Pokemon enemyPokemon = new Pokemon("charizard");
+        gymOwner.setAttackPokemon(attackPokemon);
+        for (int i = 0; i < 4; i++) {
+            attackPokemon.addEnergyForAttackCount();
+        }
+        int hPEnemyPokemon = enemyPokemon.getHp();
+        assertEquals(78,hPEnemyPokemon);
+        //act
+        gymOwner.chooseAttackOrFeed(enemyPokemon);
+        //Assert
+        assertEquals(0,attackPokemon.getEnergyForAttackCount());
     }
 }

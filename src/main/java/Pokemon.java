@@ -11,7 +11,7 @@ public class Pokemon {
     private String sound;
     private static int pokemonCount;
     private int energyForAttackCount;
-    private PokemonTrainer trainer;
+    private PokemonTrainer trainer = new PokemonTrainer("dummy");
     // place to save all the attacks which can be done
     private Map<String, List<String>> generalAttacks = new HashMap<>();
     private List<String> attacksElectric = new ArrayList<>();
@@ -225,6 +225,8 @@ public class Pokemon {
 
         }
 
+        enemy.checkIfDead();
+
         System.out.println("Energy before: " + energyForAttackCount);
         this.energyForAttackCount -= this.getStandardDamageOrEnergyCosts(nameAttack, 2);
         System.out.println("Energy after: " + energyForAttackCount);
@@ -253,6 +255,10 @@ public class Pokemon {
 
     public void losesHP(int damage) {
         this.hp-=damage;
+
+    }
+
+    public void checkIfDead(){
         if (this.hp<=0) {
             System.out.println(this.name + " is dead.");
             removeTrainer(this.trainer);
