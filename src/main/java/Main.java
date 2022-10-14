@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    // bij opstarten de pokemontrainer gelijk pokemons geven en dit in een loop zetten met opstarten spel
+
     public static void main(String[] args) {
 //        Scanner speler_A = new Scanner(System.in);
 //        PokemonGymImpl pokemonGym = new PokemonGymImpl();

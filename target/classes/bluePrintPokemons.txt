@@ -1,7 +1,0 @@
-name;level;hp;food;sound;energyForAttackCount;type;
-;blastoise;36;79;fish;pssssssssssssssssssttttttt;0;water;
-;gyarados;20;95;worms;blubblubblub;0;water;
-;charizard;36;78;chicken;gooooohhhhhhhhh;0;fire;
-;sunflora;0;75;soil;whoeswhoes;0;grass;
-;raichu;0;60;hamsterfood;RAAAAICHUUU;0;electric;
-;venusaur;31;80;tulips;broooaaaah;0;grass;

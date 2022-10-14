@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,6 +56,23 @@ class PokemonTrainerTest {
     }
 
 
-
-
+    @Test
+    void fillBenchWithPokemon() {
+        //Arrange and Act
+        PokemonTrainer p = new PokemonTrainer("hans");
+        p.fillBenchWithPokemon();
+        List<Pokemon> benchPokemons = p.getBenchPokemons();
+        List<String> namesPokemon = new ArrayList<>();
+        List<String> typesPokemons = new ArrayList<>();
+        for (Pokemon po :
+              benchPokemons  ) {
+            namesPokemon.add(po.getName());
+            typesPokemons.add(po.getType());
+        }
+        String[] expectedNamesPokemon = {"blastoise","gyarados","charizard","sunflora","raichu","venusaur"};
+        String[] expectedtypesPokemon = {"water","water","fire","grass","electric","grass"};
+        //Assert
+        assertArrayEquals(expectedNamesPokemon,namesPokemon.toArray());
+        assertArrayEquals(expectedtypesPokemon,typesPokemons.toArray());
+    }
 }

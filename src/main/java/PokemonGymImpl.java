@@ -2,13 +2,32 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class PokemonGymImpl {
-    private String nameOfGymOwner;
+
+    private PokemonGymOwner gymOwner;
+    private PokemonTrainer visitor;
+
+    public PokemonGymImpl() {
+    }
+
+    public void enteredTheGym(PokemonTrainer visitor) {
+        PokemonGymOwner gymOwner1 = new PokemonGymOwner("Winowa");
+        this.gymOwner = gymOwner1;
+        gymOwner1.fillBenchWithPokemon();
+        this.visitor = visitor;
+
+        // Hier tekst toevoegen over welkom en hoe het spel gaat lopen
+    }
 
 
-//    public PokemonTrainer createGymOwner (String name) {
-//        // create gymowner when gym is initialized
-//    }
 
+
+    public PokemonGymOwner getGymOwner() {
+        return gymOwner;
+    }
+
+    public PokemonTrainer getVisitor() {
+        return visitor;
+    }
 
     public static int askingInput(String question) {
         Scanner userInput = new Scanner(System.in);

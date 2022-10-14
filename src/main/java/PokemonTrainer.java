@@ -8,8 +8,17 @@ public class PokemonTrainer {
 
     public PokemonTrainer(String name) {
         this.name = name;
-    }
+            }
 
+    public void fillBenchWithPokemon(){
+        String[] startPokemon = {"blastoise","gyarados","charizard","sunflora","raichu","venusaur"};
+
+        for (String s :
+                startPokemon) {
+            Pokemon p = new Pokemon(s);
+            benchPokemons.add(p);
+        }
+    }
     public void chooseAttack(Pokemon enemy) {
         int placeholderAnswer;
 

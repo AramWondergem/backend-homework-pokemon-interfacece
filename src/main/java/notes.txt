@@ -91,7 +91,7 @@ basic
 
 
 to do
-- next step: doAttack test schrijven
+- next step: doAttack test schrijven --> kaarten uitdelen schrijven
 
         -extra: beveiligen kiezen getal --> een range meegeven aan askingInput
         - random vullen van benchpokemon
